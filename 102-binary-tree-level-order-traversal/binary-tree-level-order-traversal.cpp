@@ -14,7 +14,7 @@ public:
     vector<vector<int>> levelOrder(TreeNode* root) {
         if(root == nullptr) return {};
 
-        if(!root->left and !root->right) return {{root->val}};
+        // if(!root->left and !root->right) return {{root->val}};
         
         vector<vector<int>> ans;
         queue<pair<TreeNode*, int>> que;
