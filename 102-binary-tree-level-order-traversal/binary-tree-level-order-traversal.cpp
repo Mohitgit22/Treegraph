@@ -6,11 +6,12 @@ public:
         vector<vector<int>> ans;
         queue<TreeNode*> que;
         que.push(root);
+        vector<int> curr_lvl_nodes;
+
 
         while (!que.empty()) {
             int size = que.size();
-            vector<int> curr_lvl_nodes;
-
+            
             for (int i = 0; i < size; i++) {
                 TreeNode* curr = que.front();
                 que.pop();
@@ -22,6 +23,8 @@ public:
             }
 
             ans.push_back(curr_lvl_nodes);
+            curr_lvl_nodes.clear();
+
         }
 
         return ans;
