@@ -1,34 +1,43 @@
 class Solution {
 public:
-    vector<int> lowerbound(vector<int>& nums, int t) {
-        vector<int> res;
-        int n = nums.size();
-        int l = 0, r = n-1;
+    int first_el_idx(vector<int>& nums, int t){
+     int n = nums.size();
+     int l = 0, r = n-1;
+     int ans = -1;
+     while(l <= r){
+        int mid = l + (r-l)/2;
+        if(nums[mid] == t){
+          ans = mid;
+          r = mid - 1;
+        }else if(nums[mid] > t)
+        r = mid-1;
+        else
+        l = mid + 1;
+     }
+     return ans;
+    }
 
-        while(l <= r) {
-            int mid = l + (r-l)/2;
-            if(nums[mid] == t){                
-                int first_ind = mid;
-                while(first_ind-1 >=0 and nums[first_ind-1] == t)
-                first_ind--;
-
-                int sec_ind = mid;
-                while(sec_ind+1 < n and nums[sec_ind+1] == t)
-                sec_ind++;
-               
-               res.push_back(first_ind);
-               res.push_back(sec_ind);
-               return res;
-            }
-            else if(nums[mid] > t){
-                r = mid-1;
-            }else
-            l= mid + 1;
-        }
-       return {-1, -1};
+    int second_el_idx(vector<int>& nums, int t){
+     int n = nums.size();
+     int l = 0, r = n-1;
+     int ans = -1;
+     while(l <= r){
+        int mid = l + (r-l)/2;
+        if(nums[mid] == t){
+          ans = mid;
+          l = mid + 1;
+        }else if(nums[mid] > t)
+        r = mid-1;
+        else
+        l = mid + 1;
+     }
+     return ans;
     }
 
     vector<int> searchRange(vector<int>& nums, int target) {
-        return lowerbound(nums, target);
+        int first = first_el_idx(nums, target);
+        int second = second_el_idx(nums, target);
+        return {first, second};
     }
+
 };
