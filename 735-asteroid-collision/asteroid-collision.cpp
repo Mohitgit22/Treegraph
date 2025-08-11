@@ -3,33 +3,23 @@ public:
     vector<int> asteroidCollision(vector<int>& asteroids) {
         stack<int> st;
 
-        for(int i = 0; i < asteroids.size(); i++){
-            if(st.empty() and asteroids[i] < 0){
-            st.push(asteroids[i]);
-            continue;
-            }
+    for(int &it : asteroids){
 
-        
-          
-         
-           //correct
-            while(!st.empty() and asteroids[i] < 0 and st.top() > 0 and abs(asteroids[i]) > st.top()){
-            st.pop();
-            }
-              //correct
-            if(!st.empty() and asteroids[i] < 0 and abs(asteroids[i]) == st.top()){
+        while(!st.empty() and st.top() > 0 and it < 0){
+
+            int sum = st.top() + it;
+
+            if(sum > 0){
+                it = 0;
+            }else if(sum == 0){
+                it = 0;
                 st.pop();
-                continue;
-            }
-            //correct
-            if(!st.empty() and asteroids[i] < 0 and abs(asteroids[i]) < st.top())
-            continue; 
-            
-        //    if(!st.empty() and ((asteroids[i] < 0 and st.top() < 0 )||(asteroids[i] > 0 and st.top() > 0 ))){
-                st.push(asteroids[i]);
-            //     continue;
-            // }
+            }else
+               st.pop();
         }
+
+        if(it!=0) st.push(it);
+    }
 
         vector<int> res;
 
