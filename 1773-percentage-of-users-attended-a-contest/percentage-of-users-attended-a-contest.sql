@@ -7,9 +7,15 @@
 -- order by percertage desc, ;
 
 
-SELECT 
-    r.contest_id,
-    ROUND(COUNT(DISTINCT r.user_id) * 100.0 / (SELECT COUNT(*) FROM Users), 2) AS percentage
-FROM Register r
-GROUP BY r.contest_id
-ORDER BY percentage DESC, r.contest_id ASC;
+-- SELECT 
+--     r.contest_id,
+--     ROUND(COUNT(DISTINCT r.user_id) * 100.0 / (SELECT COUNT(*) FROM Users), 2) AS percentage
+-- FROM Register r
+-- GROUP BY r.contest_id
+-- ORDER BY percentage DESC, r.contest_id ASC;
+
+select p.contest_id, 
+       round(count(p.user_id) * 100.00/ (select count(*) from Users) , 2) as percentage
+from Register as p
+group by p.contest_id
+order by percentage desc, p.contest_id asc;
