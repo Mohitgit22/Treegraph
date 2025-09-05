@@ -1,31 +1,35 @@
 class Solution {
 public:
-    void ngr(vector<int>& arr, vector<int>& res){
-     stack<int> st;
-    int n = arr.size();
-     for(int i = n-1; i>=0; i--){
-
-        while(!st.empty() and st.top() <= arr[i]) st.pop();
-
-        res[i] = st.empty() ? -1 : st.top();
-
-        st.push(arr[i]);
-     }
-    }
-
-    vector<int> nextGreaterElements(vector<int>& nums) {
-        vector<int> arr(nums.begin(), nums.end());
+    vector<int> ngr(vector<int>& arr){
+        int n = arr.size();
+        stack<int> st; 
         
-        for(auto it: nums){
-            arr.push_back(it);
-        }
-        vector<int> res(arr.size());
-        ngr(arr, res);
-        vector<int> ans;
+        vector<int> ans(n);
+        for(int i = n-1; i>= 0; i--) {
+            while(!st.empty() and st.top() <= arr[i]){
+                st.pop();
+            }
 
-        for(int i = 0; i < nums.size(); i++){
-            ans.push_back(res[i]);
+            int x = st.empty() ? -1 : st.top();
+
+            ans[i] = x;
+            st.push(arr[i]);
         }
         return ans;
+    }
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> arr(2*n);
+
+        for(int i = 0; i < 2*n; i++){
+            arr[i] = nums[i%n];
+        }
+        
+        vector<int> ans = ngr(arr);
+        vector<int> res;
+        for(int i = 0; i < n; i++){
+            res.push_back(ans[i]);
+        }
+        return res;
     }
 };
