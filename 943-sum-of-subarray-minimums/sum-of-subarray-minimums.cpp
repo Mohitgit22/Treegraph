@@ -51,7 +51,6 @@ public:
             sum += it;
             sum = sum % MOD;
         }
-        sum = sum % MOD;
         return sum;
     }
 };
