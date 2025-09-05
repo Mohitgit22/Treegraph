@@ -3,14 +3,14 @@ public:
     void rotate(vector<vector<int>>& matrix) {
         int n = matrix.size();
 
-        for(int i = 0; i < n; i++){
-            for(int j = i+1; j < n; j++){
-                 swap(matrix[i][j], matrix[j][i]);
+        for(int i = 0;i < n; i++){
+            for(int j = i +1; j < n; j++){
+                swap(matrix[i][j], matrix[j][i]);
             }
         }
 
-        for(vector<int> &vec: matrix){
-            reverse(vec.begin(), vec.end());
+        for(vector<int>& it : matrix){
+            reverse(it.begin(), it.end());
         }
     }
 };
